@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+@DateTime.Now.ToLongTimeString()
+<br />
+
+<cache expires-after="TimeSpan.FromSeconds(5)">
+    @DateTime.Now.ToLongTimeString()
+</cache>
+<br />
+  Sliding Expiration
+<br />
+<cache expires-sliding="TimeSpan.FromSeconds(5)">
+    @DateTime.Now.ToLongTimeString()
+</cache>
+
+<cache expires-on="DateTime.Now.AddDays(1)">
+    @DateTime.Now.ToLongTimeString()
+</cache>
+<br />
+Var by route
+<br />
+<cache vary-by-route="id">
+    @DateTime.Now.ToLocalTime()
+</cache>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <p>@item</p>
+    }
+</div>
+

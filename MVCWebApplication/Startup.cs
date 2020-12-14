@@ -13,6 +13,7 @@ using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using MVCWebApplication.CustomMiddlewares;
 using MVCWebApplication.Services;
+using MVCWebApplication.Utility;
 
 namespace MVCWebApplication
 {
@@ -31,6 +32,8 @@ namespace MVCWebApplication
             //services.Add(new ServiceDescriptor(typeof(IMyDepedencyService), typeof(MyDepedencyService), ServiceLifetime.Singleton));
             services.AddScoped<IMyDepedencyService, MyDepedencyService>();
             services.AddControllersWithViews();
+            services.Configure<Helper>(Configuration);
+            services.AddMemoryCache();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -92,10 +95,10 @@ namespace MVCWebApplication
 
             app.UseEndpoints(endpoints =>
             {
-
+                //endpoints.MapControllersRoute("","cacheex/action/{name}")
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=cachingex}/{action=Index}/{id?}");
             });
         }
 
