@@ -1,0 +1,26 @@
+﻿@page
+@model RazorWebApplicationExample.Pages.ConsumeDepartmentAPIModel
+@{
+}
+
+
+
+@if(Model.DepartmentAPIModels!=null)
+{
+    <table class="table table-bordered table-hover" >
+        <tr class="active">
+            <th>Department Id</th>
+            <th>Department Name</th>
+            <th>Is Active</th>
+        </tr>
+
+        @foreach (var item in Model.DepartmentAPIModels)
+        {
+            <tr>
+                <td>@item.PkdepartmentId</td>
+                <td>@item.DepartmentName</td>
+                <td>@item.IsActive</td>
+            </tr>
+        }
+    </table>
+}

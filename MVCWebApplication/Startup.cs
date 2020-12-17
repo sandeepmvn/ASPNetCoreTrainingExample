@@ -62,7 +62,8 @@ namespace MVCWebApplication
                 x.UseSqlServer(this.Configuration.GetConnectionString("Default2"));
             });
 
-            services.AddTransient<IEmployeeRepo, EmployeeRepo>();
+            //services.AddTransient<IEmployeeRepo, EmployeeRepo>();
+            services.AddTransient<IEmployeeRepo, EmployeeADORepo>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -126,9 +127,17 @@ namespace MVCWebApplication
             app.UseEndpoints(endpoints =>
             {
                 //endpoints.MapControllersRoute("","cacheex/action/{name}")
+                //endpoints.MapControllerRoute("", "URL", new { controller = "", action = "" });
+
+                endpoints.MapControllerRoute("blogRoute", "blog", new { controller = "blog", action = "articles" });
+
+                endpoints.MapControllerRoute("blogbyIdRoute", "blog/{articleName:minlength(4):maxlength(12)}", new { controller = "blog", action = "article" });
+
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                //endpoints.MapDefaultControllerRoute();
             });
         }
 

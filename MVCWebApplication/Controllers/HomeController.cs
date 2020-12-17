@@ -33,8 +33,9 @@ namespace MVCWebApplication.Controllers
         public IActionResult Index([FromServices] IMyDepedencyService my_DepedencyService)
         {
             //_depedencyService.WriteMessage("this is from index method");
-            // return View();
-            return Unauthorized();
+            return View();
+            //return Unauthorized();
+            //sreturn Content("IndexPage");
         }
 
         public IActionResult Privacy()

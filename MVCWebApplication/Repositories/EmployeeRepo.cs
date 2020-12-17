@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using MVCWebApplication.Models;
+using Newtonsoft.Json;
 
 namespace MVCWebApplication.Repositories
 {
@@ -118,5 +122,72 @@ namespace MVCWebApplication.Repositories
         }
 
         #endregion
+    }
+
+
+
+    public class EmployeeADORepo : IEmployeeRepo
+    {
+        private readonly string _sqlConnectionstring;
+        public EmployeeADORepo(IConfiguration configuration)
+        {
+            _sqlConnectionstring = configuration.GetConnectionString("Default2");
+        }
+        public Task<TblEmployee> GetEmployee(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        private T sqlDatoToJson<T>(SqlDataReader dataReader)
+        {
+            var dataTable = new DataTable();
+            dataTable.Load(dataReader);
+            string JSONString = string.Empty;
+            JSONString = JsonConvert.SerializeObject(dataTable);
+            return JsonConvert.DeserializeObject<T>(JSONString);
+        }
+
+        public async Task<List<TblEmployee>> GetEmployees()
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(_sqlConnectionstring))
+                {
+                    await connection.OpenAsync();
+
+                    using (SqlCommand sqlCommand = new SqlCommand("Select * from Employees", connection))
+                    {
+                        SqlDataReader dataReader = await sqlCommand.ExecuteReaderAsync();
+                        var result = sqlDatoToJson<List<TblEmployee>>(dataReader);
+                        await dataReader.CloseAsync();
+                        return result;
+                    }
+                }
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public Task InsertEmployee(TblEmployee entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> IsEmployeeExists(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task RemoveEmployee(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task UpdateEmployee(TblEmployee entity)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30406.217
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RazorWebApplicationExample", "RazorWebApplicationExample\RazorWebApplicationExample.csproj", "{350C91BD-FE57-4DAD-9E7F-81D1C00B4EBD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RazorWebApplicationExample", "RazorWebApplicationExample\RazorWebApplicationExample.csproj", "{350C91BD-FE57-4DAD-9E7F-81D1C00B4EBD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVCWebApplication", "MVCWebApplication\MVCWebApplication.csproj", "{40450859-AF33-481E-967C-972E711A2C2D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MVCWebApplication", "MVCWebApplication\MVCWebApplication.csproj", "{40450859-AF33-481E-967C-972E711A2C2D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AngularWebApplication", "AngularWebApplication\AngularWebApplication.csproj", "{34BF46D2-7FC9-4EAB-84C2-8070B1BDA10B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AngularWebApplication", "AngularWebApplication\AngularWebApplication.csproj", "{34BF46D2-7FC9-4EAB-84C2-8070B1BDA10B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPIExample", "WebAPIExample\WebAPIExample.csproj", "{163BDF7B-ED34-4ADD-967C-54A84CE089A4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAPIExample", "WebAPIExample\WebAPIExample.csproj", "{163BDF7B-ED34-4ADD-967C-54A84CE089A4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPIExampleTests", "WebAPIExampleTests\WebAPIExampleTests.csproj", "{A7D70AE0-BFE9-46C8-8907-D97DF19B4F68}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{163BDF7B-ED34-4ADD-967C-54A84CE089A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{163BDF7B-ED34-4ADD-967C-54A84CE089A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{163BDF7B-ED34-4ADD-967C-54A84CE089A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7D70AE0-BFE9-46C8-8907-D97DF19B4F68}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7D70AE0-BFE9-46C8-8907-D97DF19B4F68}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7D70AE0-BFE9-46C8-8907-D97DF19B4F68}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7D70AE0-BFE9-46C8-8907-D97DF19B4F68}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

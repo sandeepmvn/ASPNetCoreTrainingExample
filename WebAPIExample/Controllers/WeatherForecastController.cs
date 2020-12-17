@@ -23,6 +23,9 @@ namespace WebAPIExample.Controllers
             _logger = logger;
         }
 
+        [ProducesResponseType(200)]
+        [ProducesResponseType(500)]
+        [ProducesResponseType(400)]
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {
