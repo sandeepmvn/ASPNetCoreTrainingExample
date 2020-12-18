@@ -1,0 +1,30 @@
+﻿@page
+@model RazorWebApplicationExample.Pages.CreateDepartmentPageModel
+@{
+}
+
+
+
+<form method="POST" enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly"></div>
+
+    <div>Id: <input asp-for="DepartmentAPIModel.PkdepartmentId" class="form-control" placeholder="Department Id" /></div>
+    <br /> <span asp-validation-for="DepartmentAPIModel.PkdepartmentId"></span>
+    <div>Name: <input asp-for="DepartmentAPIModel.DepartmentName" class="form-control" placeholder="Department Name" /></div>
+    <span asp-validation-for="DepartmentAPIModel.DepartmentName"></span>
+    <div>IsActive: <input asp-for="DepartmentAPIModel.IsActive" class="form-check-input" /> </div>
+
+    <input type="file" name="deptfile" />
+
+    <input type="file" asp-for="UploadDeptFiles" multiple />
+    <input type="submit" value="Submit" />
+
+
+</form>
+
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+
+

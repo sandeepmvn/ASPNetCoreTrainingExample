@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AngularWebApplication", "An
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAPIExample", "WebAPIExample\WebAPIExample.csproj", "{163BDF7B-ED34-4ADD-967C-54A84CE089A4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPIExampleTests", "WebAPIExampleTests\WebAPIExampleTests.csproj", "{A7D70AE0-BFE9-46C8-8907-D97DF19B4F68}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAPIExampleTests", "WebAPIExampleTests\WebAPIExampleTests.csproj", "{A7D70AE0-BFE9-46C8-8907-D97DF19B4F68}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
