@@ -39,6 +39,7 @@ namespace RazorWebApplicationExample.Pages
         {
             if (ModelState.IsValid)
             {
+                //ModelState.AddModelError("DepartmentName","Invalid Username or Passowrd")
                 var wwwrootpath = _env.WebRootPath;
                 using (var fileStream = new FileStream(Path.Combine(wwwrootpath,deptfile.FileName), FileMode.Create, FileAccess.ReadWrite))
                 {
