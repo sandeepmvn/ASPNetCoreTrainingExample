@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using EmployeeDeptWebApplication.Models;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 
 namespace EmployeeDeptWebApplication.Repositories
@@ -47,18 +48,20 @@ namespace EmployeeDeptWebApplication.Repositories
     }
 
 
-    public class GenericRepository<Entity> : IGenericRepository<Entity>,IDisposable where Entity : class
+    public class GenericRepository<Entity> : IGenericRepository<Entity>, IDisposable where Entity : class
     {
         #region ProtectedMembers
         protected readonly EmpDeptWebAppDBContext _context;
         protected readonly ILogger _logger;
+        protected readonly IMemoryCache _cache;
         #endregion
 
         #region Constructor
-        public GenericRepository(EmpDeptWebAppDBContext context,ILogger logger)
+        public GenericRepository(EmpDeptWebAppDBContext context, ILogger logger, IMemoryCache cache)
         {
             _context = context;
             _logger = logger;
+            _cache = cache;
         }
         #endregion
 
@@ -69,9 +72,15 @@ namespace EmployeeDeptWebApplication.Repositories
         {
             try
             {
-                return _context.Set<Entity>().ToList();
+                IEnumerable<Entity> entities = null;
+                if (!_cache.TryGetValue(nameof(Entity), out entities))
+                {
+                    entities = _context.Set<Entity>().ToList();
+                    _cache.Set(nameof(Entity), entities);
+                }
+                return entities;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 _logger.LogError(ex, nameof(GetAll));
                 throw;
@@ -84,7 +93,7 @@ namespace EmployeeDeptWebApplication.Repositories
             {
                 return _context.Set<Entity>().Where(predicate).ToList();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 _logger.LogError(ex, nameof(GetAllBy));
                 throw;
@@ -109,6 +118,7 @@ namespace EmployeeDeptWebApplication.Repositories
             {
                 _context.Set<Entity>().Add(entity);
                 _context.SaveChanges();
+                _cache.Remove(nameof(Entity));
                 return entity;
             }
             catch (Exception ex)
@@ -124,6 +134,7 @@ namespace EmployeeDeptWebApplication.Repositories
             {
                 _context.Set<Entity>().Update(entity);
                 _context.SaveChanges();
+                _cache.Remove(nameof(Entity));
             }
             catch (Exception ex)
             {
@@ -137,6 +148,7 @@ namespace EmployeeDeptWebApplication.Repositories
             {
                 _context.Set<Entity>().Remove(_context.Set<Entity>().Find(id));
                 _context.SaveChanges();
+                _cache.Remove(nameof(Entity));
             }
             catch (Exception ex)
             {

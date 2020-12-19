@@ -18,6 +18,8 @@ namespace EmployeeDeptWebApplication.Models
         [Required]
         [StringLength(100)]
         public string DepartmentName { get; set; }
+
+        //public bool IsActive { get; set; }
         #endregion
 
         #region Associations

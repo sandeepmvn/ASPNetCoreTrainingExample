@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using EmployeeDeptWebApplication.Common;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace EmployeeDeptWebApplication.Models
 {
@@ -11,8 +13,11 @@ namespace EmployeeDeptWebApplication.Models
         {
         }
 
-        public EmpDeptWebAppDBContext(DbContextOptions<EmpDeptWebAppDBContext> dbContextOptions):base(dbContextOptions)
+        private readonly Helper _helper;
+        public EmpDeptWebAppDBContext(DbContextOptions<EmpDeptWebAppDBContext> dbContextOptions, 
+            Helper helper) : base(dbContextOptions)
         {
+            _helper = helper;
         }
 
 
@@ -24,9 +29,9 @@ namespace EmployeeDeptWebApplication.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if(!optionsBuilder.IsConfigured)
+            if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=DESKTOP-UOENECT\\SQLEXPRESS;Database=EmpDeptWebAppDB;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer(_helper.GetConnectionString("EmployeeDBContext"));
             }
             base.OnConfiguring(optionsBuilder);
         }
@@ -35,7 +40,8 @@ namespace EmployeeDeptWebApplication.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
-            modelBuilder.Entity<Employee>(entity => {
+            modelBuilder.Entity<Employee>(entity =>
+            {
 
                 entity.HasOne(x => x.Department)
                 .WithMany(x => x.Employees)
@@ -43,6 +49,9 @@ namespace EmployeeDeptWebApplication.Models
                 .HasConstraintName("FK_Dept_Emp");
             });
 
+            //modelBuilder.Entity<Department>(entity => {
+            //    entity.Property(x => x.IsActive).HasDefaultValue(false);
+            //});
 
             base.OnModelCreating(modelBuilder);
         }
